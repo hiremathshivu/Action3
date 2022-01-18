@@ -1,0 +1,31 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+
+on:
+  push:
+    branches:
+     - main
+
+jobs:
+runs-on: ubuntu-latest
+    
+
+    steps:
+     - uses: actions/checkout@v2
+      
+     - name: Login
+       uses: atlassian/gajira-login@master
+       env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      
+     - name: Transition issue
+       id: transition
+       uses: atlassian/gajira-transition@master
+       with:
+        issue: AC-4
+        transition: "done"
+
+  
