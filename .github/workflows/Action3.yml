@@ -23,5 +23,5 @@ jobs:
          uses: atlassian/gajira-transition@master
          with:
           issue: AC-4
-          transition: "done"
+          transition: "GO to done"
 
